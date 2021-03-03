@@ -14,6 +14,7 @@ class MobileView extends StatelessWidget {
     @required this.navigator,
     @required this.nullItems,
     @required this.emptyItems,
+    @required this.controller,
   })  : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
@@ -33,6 +34,7 @@ class MobileView extends StatelessWidget {
     @required this.navigator,
     @required this.nullItems,
     @required this.emptyItems,
+    @required this.controller,
   })  : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -52,6 +54,7 @@ class MobileView extends StatelessWidget {
     @required this.navigator,
     @required this.nullItems,
     @required this.emptyItems,
+    @required this.controller,
   }) : super(key: key);
 
   final List<Widget> slivers;
@@ -61,10 +64,12 @@ class MobileView extends StatelessWidget {
   final NavigatorState navigator;
   final Widget nullItems, emptyItems;
   final SliverChildDelegate childDelagate;
+  final ScrollController controller;
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: controller,
       slivers: <Widget>[]
         ..addAll(slivers ?? [])
         ..add(Builder(

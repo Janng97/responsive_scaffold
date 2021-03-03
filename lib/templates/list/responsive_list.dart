@@ -7,37 +7,38 @@ import 'views/index.dart';
 export 'package:responsive_scaffold/data/classes/details.dart';
 
 class ResponsiveListScaffold extends StatelessWidget {
-  ResponsiveListScaffold({
-    this.tabletBreakpoint = 720.0,
-    @required this.detailBuilder,
-    this.appBar,
-    this.drawer,
-    this.slivers,
-    this.endDrawer,
-    @required List<Widget> children,
-    this.primary = true,
-    // this.extendBody = false,
-    this.drawerDragStartBehavior = DragStartBehavior.start,
-    this.backgroundColor,
-    this.bottomNavigationBar,
-    this.bottomSheet,
-    this.floatingActionButton,
-    this.floatingActionButtonAnimator,
-    this.floatingActionButtonLocation,
-    this.persistentFooterButtons,
-    this.resizeToAvoidBottomInset,
-    this.resizeToAvoidBottomPadding,
-    this.tabletItemNotSelected,
-    this.tabletSideMenu,
-    this.nullItems,
-    this.emptyItems,
-    this.tabletFlexDetailView = 8,
-    this.tabletFlexListView = 3,
-    this.scaffoldKey,
-    this.detailScaffoldKey,
-    this.mobileRootNavigator = false,
-    this.mobileNavigator,
-  }) : childDelagate = SliverChildListDelegate(
+  ResponsiveListScaffold(
+      {this.tabletBreakpoint = 720.0,
+      @required this.detailBuilder,
+      this.appBar,
+      this.drawer,
+      this.slivers,
+      this.endDrawer,
+      @required List<Widget> children,
+      this.primary = true,
+      // this.extendBody = false,
+      this.drawerDragStartBehavior = DragStartBehavior.start,
+      this.backgroundColor,
+      this.bottomNavigationBar,
+      this.bottomSheet,
+      this.floatingActionButton,
+      this.floatingActionButtonAnimator,
+      this.floatingActionButtonLocation,
+      this.persistentFooterButtons,
+      this.resizeToAvoidBottomInset,
+      this.resizeToAvoidBottomPadding,
+      this.tabletItemNotSelected,
+      this.tabletSideMenu,
+      this.nullItems,
+      this.emptyItems,
+      this.tabletFlexDetailView = 8,
+      this.tabletFlexListView = 3,
+      this.scaffoldKey,
+      this.detailScaffoldKey,
+      this.mobileRootNavigator = false,
+      this.mobileNavigator,
+      this.controller})
+      : childDelagate = SliverChildListDelegate(
           children,
           addAutomaticKeepAlives: false,
           addRepaintBoundaries: false,
@@ -75,6 +76,7 @@ class ResponsiveListScaffold extends StatelessWidget {
     this.detailScaffoldKey,
     this.mobileRootNavigator = false,
     this.mobileNavigator,
+    this.controller,
   }) : childDelagate = SliverChildBuilderDelegate(
           itemBuilder,
           childCount: itemCount,
@@ -113,6 +115,7 @@ class ResponsiveListScaffold extends StatelessWidget {
     this.detailScaffoldKey,
     this.mobileRootNavigator = false,
     this.mobileNavigator,
+    this.controller,
   });
 
   final double tabletBreakpoint;
@@ -167,6 +170,8 @@ class ResponsiveListScaffold extends StatelessWidget {
 
   final SliverChildDelegate childDelagate;
 
+  final ScrollController controller;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -201,6 +206,7 @@ class ResponsiveListScaffold extends StatelessWidget {
             flexListView: tabletFlexListView,
             sideMenu: tabletSideMenu,
             itemNotSelected: tabletItemNotSelected,
+            controller: controller,
           );
         }
 
@@ -230,6 +236,7 @@ class ResponsiveListScaffold extends StatelessWidget {
             detailBuilder: detailBuilder,
             childDelagate: childDelagate,
             navigator: mobileNavigator,
+            controller: controller,
           ),
         );
       },
